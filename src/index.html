@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personajes de AlgoLandia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="site-body">
+    <nav id="btnrow" class="site-navbar navbar navbar-expand-lg rounded-4 px-3 py-3 mb-5" data-bs-theme="dark" aria-label="Navegación principal">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand me-4" href="./index.html">AlgoLandia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="Mostrar u ocultar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">
+                <div id="nav-actions" class="navbar-nav ms-auto flex-wrap align-items-lg-center gap-2 pt-3 pt-lg-0">
+                    <a class="btn brand-btn rounded-pill fw-bold active" href="./index.html" aria-current="page">Inicio</a>
+                    <a class="btn brand-btn rounded-pill fw-bold" href="./pages/personajes.html">Personajes</a>
+                    <a class="btn brand-btn rounded-pill fw-bold" href="#">Sobre el Proyecto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="home-main">
+        <h1 class="mb-3">Bienvenidos a los Personajes de AlgoLandia</h1>
+        <p class="ms-4 mb-4">AlgoLandia es un punto de encuentro para héroes, villanos y figuras inolvidables de distintos mundos.
+            Explora la galería, conoce las habilidades de cada personaje y elige cuál de ellos merece ocupar un lugar
+            entre tus favoritos.</p>
+        <section class="daily-quote-panel rounded-4 p-3 p-md-4 mt-4 mx-auto text-center" aria-labelledby="daily-quote-title-home">
+            <div class="d-flex flex-column align-items-center justify-content-center gap-3">
+                <div class="text-center">
+                    <h4 id="daily-quote-title-home" class="daily-quote-title mb-1">Frase del día</h4>
+                    <p class="daily-quote-copy m-0">Descubre un dato inesperado para acompañar tu visita.</p>
+                </div>
+                <div id="daily-quote-actions" class="d-flex flex-wrap align-items-center justify-content-center gap-2"></div>
+            </div>
+            <div id="quote-output" class="w-100" aria-live="polite"></div>
+        </section>
+    </main>
+    <footer class="home-footer redes-pagina d-flex flex-column align-items-center justify-content-center pt-5 mt-0 text-center">
+        <h3 class="mb-1">Conecta con nosotros</h3>
+        <p class="footer-copy mb-3">Comparte cuál es tu personaje favorito y descubre nuevas historias de AlgoLandia.</p>
+        <nav class="d-flex flex-wrap align-items-center justify-content-center gap-2 my-2 mb-4 p-0" aria-label="Redes sociales">
+            <a href="https://facebook.com" class="btn brand-btn social-link rounded-pill px-3 py-2">Facebook</a>
+            <a href="https://instagram.com" class="btn brand-btn social-link rounded-pill px-3 py-2">Instagram</a>
+            <a href="https://twitter.com" class="btn brand-btn social-link rounded-pill px-3 py-2">X</a>
+        </nav>
+        <p class="footer-note m-0 fst-italic">AlgoLandia · Un lugar para héroes y villanos</p>
+    </footer>
+    <script src="js/inicio.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
