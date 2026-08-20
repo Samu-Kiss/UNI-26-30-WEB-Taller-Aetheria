@@ -1,21 +1,16 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -35,17 +30,43 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Build the folder that will actually be published
       - name: Prepare site
         run: |
-          mkdir site
+          rm -rf site
+          mkdir -p site
+
+          # src pasa a ser la raíz del sitio
           cp -r src/. site/
-          cp -r public/. site/
+
+          # public se conserva como /public
+          mkdir -p site/public
+          cp -r public/. site/public/
+
+          # Adaptar referencias que originalmente eran
+          # src -> ../public
+          find site -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) \
+            -exec sed -i 's#\.\./public/#./public/#g' {} +
+
+          # Evitar procesamiento de Jekyll
+          touch site/.nojekyll
+
+      - name: Verify site contents
+        run: |
+          echo "===== FILES THAT WILL BE DEPLOYED ====="
+          find site -type f | sort
+
+          echo ""
+          echo "===== CHECKING INDEX ====="
+          test -f site/index.html && echo "index.html OK" || exit 1
+
+          echo ""
+          echo "===== PUBLIC FILES ====="
+          find site/public -type f | sort
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: './site'
+          path: "./site"
 
       - name: Deploy to GitHub Pages
         id: deployment
