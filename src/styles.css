@@ -26,7 +26,7 @@ html {
 }
 
 .site-body {
-    width: 60%;
+    width: min(94%, 1440px);
     min-height: 100vh;
     margin: 5% auto 2%;
     font-family: Georgia, "Times New Roman", serif;
@@ -144,14 +144,47 @@ p {
     grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
-.gallery-grid {
-    gap: 2rem;
+.aetheria-carousel {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.carousel-image {
+    height: clamp(22rem, 48vw, 38rem);
+    object-fit: cover;
+    object-position: center;
+}
+
+.aetheria-carousel .carousel-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 7, 10, 0.84), transparent 58%);
+}
+
+.aetheria-carousel .carousel-caption {
+    z-index: 1;
+    right: 12%;
+    bottom: clamp(1.25rem, 4vw, 3rem);
+    left: 12%;
+    padding: 1rem;
+    background-color: rgba(6, 7, 10, 0.58);
+    border: 1px solid rgba(244, 235, 216, 0.16);
+    backdrop-filter: blur(8px);
+}
+
+.aetheria-carousel .carousel-caption h2 {
+    margin-bottom: 0.25rem;
+    color: var(--accent-hover);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.aetheria-carousel .carousel-caption p {
+    margin: 0;
+    font-size: clamp(0.95rem, 2vw, 1.25rem);
 }
 
 .character-card {
-    display: block;
-    flex: 1 1 360px;
-    max-width: 500px;
     border-color: var(--border);
     color: var(--text);
     background-color: var(--panel);
@@ -163,6 +196,11 @@ p {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
+}
+
+.character-card .card-text {
+    color: var(--text);
+    font-size: 1rem;
 }
 
 .character-card:hover {
@@ -201,6 +239,10 @@ p {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1rem;
     line-height: normal;
+}
+
+.stats {
+    color: var(--muted);
 }
 
 .character-card h4 {
@@ -296,13 +338,19 @@ p {
         padding-top: 2rem;
     }
 
-    .site-body main > p,
-    .character-card p {
+    .site-body main > p {
         margin-left: 0 !important;
     }
 
-    .stats {
-        flex-direction: column;
+    .carousel-image {
+        height: 24rem;
+    }
+
+    .aetheria-carousel .carousel-caption {
+        right: 8%;
+        bottom: 1rem;
+        left: 8%;
+        padding: 0.75rem;
     }
 
     #btnrow .btn {

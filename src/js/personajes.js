@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const encabezado = document.getElementById("head");
-    const tarjetas = document.querySelectorAll(".card");
+    const tarjetas = document.querySelectorAll(".ficha");
 
     if (!encabezado || tarjetas.length === 0) return;
 
@@ -23,9 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tarjetas.forEach((tarjeta) => {
             const esVisible = !tipoVisible || tarjeta.dataset.tipo === tipoVisible;
+            const columna = tarjeta.closest(".character-column");
 
-            tarjeta.hidden = !esVisible;
-            tarjeta.classList.toggle("d-none", !esVisible);
+            if (columna) {
+                columna.hidden = !esVisible;
+                columna.classList.toggle("d-none", !esVisible);
+            }
+
             tarjeta.classList.toggle("resaltado", esVisible && Boolean(tipoVisible));
         });
 
@@ -36,18 +40,26 @@ document.addEventListener("DOMContentLoaded", () => {
     encabezado.append(botonFiltro);
 
     tarjetas.forEach((tarjeta) => {
-        tarjeta.insertBefore(createFavoriteButton(tarjeta), tarjeta.firstChild);
+        const cuerpoTarjeta = tarjeta.querySelector(".card-body");
+
+        if (cuerpoTarjeta) {
+            cuerpoTarjeta.prepend(createFavoriteButton(tarjeta));
+        }
     });
 });
 
 function createFavoriteButton(tarjeta) {
-    const botonFavorito = document.createElement("a");
+    const botonFavorito = document.createElement("button");
+    botonFavorito.type = "button";
     botonFavorito.className = "favorite-btn float-end d-inline-flex align-items-center justify-content-center p-0 rounded-circle fw-bold text-decoration-none";
     botonFavorito.textContent = "⭐";
+    botonFavorito.setAttribute("aria-label", `Guardar a ${tarjeta.querySelector(".nombre").textContent} como favorito`);
 
-    botonFavorito.addEventListener("click", (event) => {
+    botonFavorito.addEventListener("click", () => {
         const name = tarjeta.querySelector(".nombre").textContent;
         guardarFavorito(name).then(function (mensaje) {
+            botonFavorito.setAttribute("aria-pressed", "true");
+            botonFavorito.title = mensaje;
             console.log(mensaje);
         }).catch(function (error) {
             console.error(error);
